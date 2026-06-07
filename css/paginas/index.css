@@ -1,92 +1,104 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap');
-body{
+
+:root {
+    --cor-fundo-botao-1: #0a5851;
+    --cor-fundo-botao-2: #043531;
+    --cor-borda: #C9A15B;
+    --cor-brilho-hover-1: #0e6e65;
+    --cor-brilho-hover-2: #06443f;
+    --cor-white: #ffffff;
+}
+
+
+body {
     padding: 0;
     margin: 0;
+    /* background-color: rgba(5, 5, 5, 1); */
 }
 
 /* BOTÃO LOGIN */
 .btn-login {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  
-  padding: 12px 40px;
-  min-width: 180px;
-  height: 48px;
-  color: #ffffff;
-  margin-left: 50px;
-  
-  font-family: 'Cinzel', serif;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  
-  cursor: pointer;
-  position: relative;
-  box-sizing: border-box;
-  
-  /* Remove as bordas antigas que causavam o erro */
-  border: none; 
-  background: transparent;
-  transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 12px 40px;
+    min-width: 180px;
+    height: 48px;
+    color: var(--cor-white);
+    margin-left: 50px;
+
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+
+    /* Remove as bordas antigas que causavam o erro */
+    border: none;
+    background: transparent;
+    transition: all 0.3s ease;
 }
 
 /* CAMADA 1: O FUNDO VERDE DO BOTÃO (Com o corte redondo para dentro) */
 .btn-login::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, #0a5851 0%, #043531 100%);
-  z-index: 1;
-  transition: background 0.3s ease;
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, var(--cor-fundo-botao-1) 0%, var(--cor-fundo-botao-2) 100%);
+    z-index: 1;
+    transition: background 0.3s ease;
 
-  /* Aplica a máscara que morde os 4 cantos perfeitamente */
-  mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
-  -webkit-mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+    /* Aplica a máscara que morde os 4 cantos perfeitamente */
+    mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+    -webkit-mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
 }
 
 /* CAMADA 2: A BORDA DOURADA (Que acompanha a curva para dentro sem quebrar) */
 .btn-login::after {
-  content: "";
-  position: absolute;
-  /* Fica levemente para fora para criar a linha dourada perfeita */
-  inset: -4px; 
-  background: #C9A15B;
-  z-index: 0;
-  transition: background 0.3s ease;
+    content: "";
+    position: absolute;
+    /* Fica levemente para fora para criar a linha dourada perfeita */
+    inset: -4px;
+    background: var(--cor-borda);
+    z-index: 0;
+    transition: background 0.3s ease;
 
-  /* Aplica a mesma máscara, ajustada para a espessura da borda */
-  mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
-  -webkit-mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+    /* Aplica a mesma máscara, ajustada para a espessura da borda */
+    mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+    -webkit-mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
 }
 
 /* Garante que o texto e o ícone fiquem por cima das camadas de fundo */
 .btn-login img,
 .btn-login span {
-  position: relative;
-  z-index: 2;
+    position: relative;
+    z-index: 2;
 }
 
 /* EFEITOS DE HOVER (Quando passa o mouse) */
 .btn-login:hover {
-  transform: translateY(-2px);
-  filter: drop-shadow(0px 5px 8px rgba(0, 0, 0, 0.6));
+    transform: translateY(-2px);
+    filter: drop-shadow(0px 5px 8px rgba(0, 0, 0, 0.6));
 }
 
 /* Clareia o fundo verde no hover */
 .btn-login:hover::before {
-  background: radial-gradient(circle, #0e6e65 0%, #06443f 100%);
+    background: radial-gradient(circle, var(--cor-brilho-hover-1) 0%, var(--cor-brilho-hover-2) 100%);
 }
 
 /* Faz a borda dourada brilhar no hover */
 .btn-login:hover::after {
-  background: #c5a880;
+    background: var(--cor-borda);
 }
 
 /* Efeito de Clique */
 .btn-login:active {
-  transform: translateY(1px);
+    transform: translateY(1px);
 }
 
 
@@ -98,18 +110,18 @@ body{
     font-weight: 700;
     letter-spacing: 2px;
     margin: 0;
-    
+
     /* 1. Criamos um gradiente que muda de cor exatamente nos 50% (metade) */
-    background: linear-gradient(to right, #ffffff 50%, #c5a880 50%);
-    
+    background: linear-gradient(to right, #ffffff 50%, var(--cor-borda) 50%);
+
     /* 2. Dizemos para o fundo ficar "preso" apenas onde tem texto escrito */
     -webkit-background-clip: text;
     background-clip: text;
-    
+
     /* 3. Deixamos a cor real do texto transparente para o fundo de duas cores aparecer */
     -webkit-text-fill-color: transparent;
     color: transparent;
-    
+
     /* 4. Evita que o efeito quebre se a palavra tentar quebrar de linha */
     display: inline-block;
 }
@@ -124,13 +136,13 @@ body{
     padding: 0 40px;
     font-family: 'Cinzel', serif;
     box-sizing: border-box;
-    
+
     /* Deixamos o menu flutuando por cima da imagem */
     position: relative;
-    z-index: 2; 
-    
+    z-index: 2;
+
     /* Um fundo escuro bem suave com vidro fosco para não sumir com o texto */
-    background-color: rgba(5, 5, 5, 0.5); 
+    background-color: rgba(5, 5, 5, 0.5);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border-bottom: 2px solid rgba(140, 109, 69, 0.2);
@@ -139,11 +151,13 @@ body{
 .header-marca {
     display: flex;
     align-items: center;
-    gap: 15px; /* Espaço exato entre a imagem da logo e o texto h1 */
+    gap: 15px;
+    /* Espaço exato entre a imagem da logo e o texto h1 */
 }
 
 .logo-img {
-    width: 60px; /* Tamanho controlado para a logo no cabeçalho */
+    width: 60px;
+    /* Tamanho controlado para a logo no cabeçalho */
     height: 60px;
     object-fit: contain;
 }
@@ -159,7 +173,8 @@ body{
 .header-btn {
     display: flex;
     align-items: center;
-    gap: 25px; /* Espaço perfeito entre o sino de notificação e o botão de login */
+    gap: 25px;
+    /* Espaço perfeito entre o sino de notificação e o botão de login */
 }
 
 .icon-notificacao {
@@ -170,7 +185,8 @@ body{
 }
 
 .icon-notificacao:hover {
-    transform: scale(1.1); /* Efeito sutil ao passar o mouse no sininho */
+    transform: scale(1.1);
+    /* Efeito sutil ao passar o mouse no sininho */
 }
 
 /* Remove estilos padrões do link em volta do botão */
@@ -185,31 +201,372 @@ body{
     font-size: 1rem !important;
     padding: 0 20px !important;
 }
- 
+
 .backgroud-img {
-    position: absolute; /* Ocupa o espaço do pai (que é o <header>) */
+    position: absolute;
+    /* Ocupa o espaço do pai (que é o <header>) */
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Preenche os 650px de altura definidos no <header> */
-    z-index: -1;   /* Fica atrás do menu, mas na frente do body */
-    
+    height: 100%;
+    /* Preenche os 650px de altura definidos no <header> */
+    z-index: -1;
+    /* Fica atrás do menu, mas na frente do body */
+
     /* Gradiente que escurece na base para misturar com o fundo preto do site */
-    background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(5, 5, 5, 1) 92%), 
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(5, 5, 5, 1) 92%),
         url('../../assets/image/castelo_dragao.png');
-    
-    background-size: cover;      /* Ajusta a proporção sem distorcer o desenho */
-    background-position: center top; /* Foca no topo da imagem (dragão/castelo) */
+
+    background-size: cover;
+    /* Ajusta a proporção sem distorcer o desenho */
+    background-position: center top;
+    /* Foca no topo da imagem (dragão/castelo) */
     background-repeat: no-repeat;
 }
 
 
+
 /* INICIO */
 
-
-.inicio hr {
-    width: 80px;
-    border: 1px solid #038a7e;
+.container-inicio {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    /* Ajuste o caminho da sua imagem de fundo aqui */
+    background: url('./assets/images/background.jpg') no-repeat center center;
+    background-size: cover;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Garante que o conteúdo fique em cima e o "Role" embaixo */
+    padding: 80px 10%;
+    /* Afastamento das bordas da tela */
 }
 
+/* --- BLOCO DE CONTEÚDO (TEXTOS E BOTÕES) --- */
+.inicio {
+    max-width: 600px;
+    /* Limita a largura para o texto quebrar igual ao design */
+    margin-top: auto;
+    margin-bottom: auto;
+    /* Centraliza verticalmente o bloco na metade superior */
+    display: flex;
+    flex-direction: column;
+    /* Alinha os blocos verticalmente */
+    align-items: flex-start;
+    /* Alinha tudo à esquerda */
+    gap: 20px;
+    /* Espaçamento padrão entre os blocos */
+}
+
+/* Linha decorativa de "Aventuras Épicas" */
+.inicio div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.inicio p:first-of-type {
+    font-family: 'Cinzel', serif;
+    color: #038a7e;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Título Principal */
+.inicio h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    /* Tamanho grande conforme a imagem */
+    color: #ffffff;
+    line-height: 1.1;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Destaque na palavra "Místico" */
+.inicio h1 span {
+    color: #00a896;
+    /* Tom verde/turquesa do design */
+}
+
+/* Subtítulo */
+.inicio p:last-of-type {
+    font-family: 'Inter', sans-serif;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0 0 15px 0;
+}
+
+.linha-titulo {
+    display: flex;
+    align-items: center; 
+    gap: 15px;           
+}
+
+.linha-titulo p {
+    font-family: 'Cinzel', serif; 
+    color: #b0c4de;      
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.linha-titulo .linha {
+    width: 40px;
+    height: 2px;
+    background-color: #038a7e;
+    display: inline-block; /* Garante que ela se comporte bem como bloco flexível */
+}
+
+/* --- CONTAINER DOS BOTÕES --- */
+/* Criamos essa classe para alinhar os botões lado a lado */
+.botoes-container {
+    display: flex;
+    gap: 20px;
+}
+
+/* --- AJUSTES NOS SEUS BOTÕES ORIGINAIS --- */
+.btn-inicio,
+.btn-info {
+    margin-left: 0 !important;
+    /* Remove o margin-left de 50px antigo */
+}
+
+.btn-inicio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 12px 40px;
+    min-width: 180px;
+    height: 48px;
+    color: var(--cor-white);
+    margin-left: 50px;
+
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+
+    /* Remove as bordas antigas que causavam o erro */
+    border: none;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+/* CAMADA 1: O FUNDO VERDE DO BOTÃO (Com o corte redondo para dentro) */
+.btn-inicio::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, var(--cor-fundo-botao-1) 0%, var(--cor-fundo-botao-2) 100%);
+    z-index: 1;
+    transition: background 0.3s ease;
+    border: black solid 0.13rem;
+
+    /* Aplica a máscara que morde os 4 cantos perfeitamente */
+    mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+    -webkit-mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+}
+
+/* CAMADA 2: A BORDA DOURADA (Que acompanha a curva para dentro sem quebrar) */
+.btn-inicio::after {
+    content: "";
+    position: absolute;
+    /* Fica levemente para fora para criar a linha dourada perfeita */
+    inset: -3px;
+    background: var(--cor-borda);
+    z-index: 0;
+    transition: background 0.3s ease;
+
+    /* Aplica a mesma máscara, ajustada para a espessura da borda */
+    mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+    -webkit-mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+}
+
+/* Garante que o texto e o ícone fiquem por cima das camadas de fundo */
+.btn-inicio img,
+.btn-inicio span {
+    position: relative;
+    z-index: 2;
+}
+
+/* EFEITOS DE HOVER (Quando passa o mouse) */
+.btn-inicio:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0px 5px 8px rgba(0, 0, 0, 0.6));
+}
+
+/* Clareia o fundo verde no hover */
+.btn-inicio:hover::before {
+    background: radial-gradient(circle, var(--cor-brilho-hover-1) 0%, var(--cor-brilho-hover-2) 100%);
+}
+
+/* Faz a borda dourada brilhar no hover */
+.btn-inicio:hover::after {
+    background: var(--cor-borda);
+}
+
+/* Efeito de Clique */
+.btn-inicio:active {
+    transform: translateY(1px);
+}
+
+.btn-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 12px 30px;
+    min-width: 180px;
+    height: 48px;
+    color: var(--cor-white);
+    margin-left: 50px;
+
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+
+    /* Remove as bordas antigas que causavam o erro */
+    border: none;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+/* CAMADA 1: O FUNDO VERDE DO BOTÃO (Com o corte redondo para dentro) */
+.btn-info::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #031311;
+    z-index: 1;
+    transition: background 0.3s ease;
+
+    /* Aplica a máscara que morde os 4 cantos perfeitamente */
+    mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+    -webkit-mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+}
+
+/* CAMADA 2: A BORDA VENDE CLARO (Que acompanha a curva para dentro sem quebrar) */
+.btn-info::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    background: var(--cor-brilho-hover-1);
+    z-index: 0;
+    transition: background 0.3s ease;
+
+    /* Aplica a mesma máscara, ajustada para a espessura da borda */
+    mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+    -webkit-mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+}
+
+/* Garante que o texto e o ícone fiquem por cima das camadas de fundo */
+.btn-info img,
+.btn-info span {
+    position: relative;
+    z-index: 2;
+}
+
+/* EFEITOS DE HOVER (Quando passa o mouse) */
+.btn-info:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0px 5px 8px rgba(0, 0, 0, 0.6));
+}
+
+/* Clareia o fundo verde no hover */
+.btn-info:hover::before {
+    background: radial-gradient(circle, var(--cor-brilho-hover-1) 0%, var(--cor-brilho-hover-2) 50%);
+}
+
+/* Faz a borda dourada brilhar no hover */
+.btn-info:hover::after {
+    background: #619791;
+}
+
+/* Efeito de Clique */
+.btn-info:active {
+    transform: translateY(1px);
+}
+
+/* --- SEÇÃO ROLE PARA EXPLORAR (RODAPÉ) --- */
+.role-explore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+    gap: 8px;
+    transition: opacity 0.1s linear;
+}
+
+.role-explore img {
+    width: 50px;
+    /* Tamanho ajustado para o ícone do mouse */
+    height: auto;
+}
+
+.role-explore p {
+    font-family: 'Cinzel', serif;
+    color: #038a7e;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* O CONTAINER DA LINHA: Transforma em flex para deitar os elementos */
+.linha-decorativa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    /* Espaço entre as linhas e o detalhe do meio */
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+/* AS LINHAS LATERAIS (AGORA HORIZONTAIS) */
+.linha-decorativa .linha {
+    width: 40px;
+    /* Comprimento da linha horizontal */
+    height: 2px;
+    /* Espessura da linha */
+    background-color: #038a7e;
+    /* Cor verde/turquesa */
+    display: inline-block;
+}
+
+/* O DETALHE DO MEIO */
+.linha-decorativa .ponto {
+    color: #038a7e;
+    font-size: 0.6rem;
+    /* Deixa o losango pequenininho igual ao design */
+}
+
+
+/* MESA ONLINE DISPONIVEIS */
+
+.container-mesa-online {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
