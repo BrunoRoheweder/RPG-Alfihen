@@ -1,0 +1,1143 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap');
+
+:root {
+    --cor-fundo-botao-1: #0a5851;
+    --cor-fundo-botao-2: #043531;
+    --cor-borda: #C9A15B;
+    --cor-brilho-hover-1: #0e6e65;
+    --cor-brilho-hover-2: #06443f;
+    --cor-white: #ffffff;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: rgba(8, 8, 8, 1);
+}
+
+/* BOTÃO LOGIN */
+.btn-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 12px 40px;
+    min-width: 180px;
+    height: 48px;
+    color: var(--cor-white);
+    margin-left: 50px;
+
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+
+    /* Remove as bordas antigas que causavam o erro */
+    border: none;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+/* CAMADA 1: O FUNDO VERDE DO BOTÃO (Com o corte redondo para dentro) */
+.btn-login::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, var(--cor-fundo-botao-1) 0%, var(--cor-fundo-botao-2) 100%);
+    z-index: 1;
+    transition: background 0.3s ease;
+
+    /* Aplica a máscara que morde os 4 cantos perfeitamente */
+    mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+    -webkit-mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+}
+
+/* CAMADA 2: A BORDA DOURADA (Que acompanha a curva para dentro sem quebrar) */
+.btn-login::after {
+    content: "";
+    position: absolute;
+    /* Fica levemente para fora para criar a linha dourada perfeita */
+    inset: -4px;
+    background: var(--cor-borda);
+    z-index: 0;
+    transition: background 0.3s ease;
+
+    /* Aplica a mesma máscara, ajustada para a espessura da borda */
+    mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+    -webkit-mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+}
+
+/* Garante que o texto e o ícone fiquem por cima das camadas de fundo */
+.btn-login img,
+.btn-login span {
+    position: relative;
+    z-index: 2;
+}
+
+/* EFEITOS DE HOVER (Quando passa o mouse) */
+.btn-login:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0px 5px 8px rgba(0, 0, 0, 0.6));
+}
+
+/* Clareia o fundo verde no hover */
+.btn-login:hover::before {
+    background: radial-gradient(circle, var(--cor-brilho-hover-1) 0%, var(--cor-brilho-hover-2) 100%);
+}
+
+/* Faz a borda dourada brilhar no hover */
+.btn-login:hover::after {
+    background: var(--cor-borda);
+}
+
+/* Efeito de Clique */
+.btn-login:active {
+    transform: translateY(1px);
+}
+
+
+/* BARRA HEADER */
+
+.nome {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+
+    /* 1. Criamos um gradiente que muda de cor exatamente nos 50% (metade) */
+    background: linear-gradient(to right, #ffffff 50%, var(--cor-borda) 50%);
+
+    /* 2. Dizemos para o fundo ficar "preso" apenas onde tem texto escrito */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* 3. Deixamos a cor real do texto transparente para o fundo de duas cores aparecer */
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    /* 4. Evita que o efeito quebre se a palavra tentar quebrar de linha */
+    display: inline-block;
+}
+
+
+.header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    font-family: 'Cinzel', serif;
+    box-sizing: border-box;
+
+    /* Deixamos o menu flutuando por cima da imagem */
+    position: relative;
+    z-index: 2;
+
+    /* Um fundo escuro bem suave com vidro fosco para não sumir com o texto */
+    background-color: rgba(5, 5, 5, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-bottom: 2px solid rgba(140, 109, 69, 0.2);
+}
+
+.header-marca {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Espaço exato entre a imagem da logo e o texto h1 */
+}
+
+.logo-img {
+    width: 60px;
+    /* Tamanho controlado para a logo no cabeçalho */
+    height: 60px;
+    object-fit: contain;
+}
+
+.header h1 {
+    color: white;
+    font-size: 1.8rem;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+/* Bloco de Botões e Notificação */
+.header-btn {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    /* Espaço perfeito entre o sino de notificação e o botão de login */
+}
+
+.icon-notificacao {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.icon-notificacao:hover {
+    transform: scale(1.1);
+    /* Efeito sutil ao passar o mouse no sininho */
+}
+
+/* Remove estilos padrões do link em volta do botão */
+.login-link {
+    text-decoration: none;
+}
+
+/* Ajuste rápido para o seu botão de login caber perfeitamente no cabeçalho */
+.btn-login {
+    min-width: 160px !important;
+    height: 44px !important;
+    font-size: 1rem !important;
+    padding: 0 20px !important;
+}
+
+.backgroud-img {
+    position: absolute;
+    /* Ocupa o espaço do pai (que é o <header>) */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Preenche os 650px de altura definidos no <header> */
+    z-index: -1;
+    /* Fica atrás do menu, mas na frente do body */
+
+    /* Gradiente que escurece na base para misturar com o fundo preto do site */
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(8, 8, 8, 1) 92%),
+        url('../../assets/image/castelo_dragao.png');
+
+    background-size: cover;
+    /* Ajusta a proporção sem distorcer o desenho */
+    background-position: center top;
+    /* Foca no topo da imagem (dragão/castelo) */
+    background-repeat: no-repeat;
+}
+
+
+
+/* INICIO */
+
+.container-inicio {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Garante que o conteúdo fique em cima e o "Role" embaixo */
+    padding: 80px 10%;
+    /* Afastamento das bordas da tela */
+}
+
+/* --- BLOCO DE CONTEÚDO (TEXTOS E BOTÕES) --- */
+.inicio {
+    max-width: 600px;
+    /* Limita a largura para o texto quebrar igual ao design */
+    margin-top: auto;
+    margin-bottom: auto;
+    /* Centraliza verticalmente o bloco na metade superior */
+    display: flex;
+    flex-direction: column;
+    /* Alinha os blocos verticalmente */
+    align-items: flex-start;
+    /* Alinha tudo à esquerda */
+    gap: 20px;
+    /* Espaçamento padrão entre os blocos */
+}
+
+/* Linha decorativa de "Aventuras Épicas" */
+.inicio div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.inicio p:first-of-type {
+    font-family: 'Cinzel', serif;
+    color: #038a7e;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Título Principal */
+.inicio h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    /* Tamanho grande conforme a imagem */
+    color: #ffffff;
+    line-height: 1.1;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Destaque na palavra "Místico" */
+.inicio h1 span {
+    color: #00a896;
+    /* Tom verde/turquesa do design */
+}
+
+/* Subtítulo */
+.inicio p:last-of-type {
+    font-family: 'Inter', sans-serif;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0 0 15px 0;
+}
+
+.linha-titulo {
+    display: flex;
+    align-items: center; 
+    gap: 15px;           
+}
+
+.linha-titulo p {
+    font-family: 'Cinzel', serif; 
+    color: #b0c4de;      
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.linha-titulo .linha {
+    width: 40px;
+    height: 2px;
+    background-color: #038a7e;
+    display: inline-block; /* Garante que ela se comporte bem como bloco flexível */
+}
+
+/* --- CONTAINER DOS BOTÕES --- */
+/* Criamos essa classe para alinhar os botões lado a lado */
+.botoes-container {
+    display: flex;
+    gap: 20px;
+}
+
+/* --- AJUSTES NOS SEUS BOTÕES ORIGINAIS --- */
+.btn-inicio,
+.btn-info {
+    margin-left: 0 !important;
+    /* Remove o margin-left de 50px antigo */
+}
+
+.btn-inicio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 12px 40px;
+    min-width: 180px;
+    height: 48px;
+    color: var(--cor-white);
+    margin-left: 50px;
+
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+
+    /* Remove as bordas antigas que causavam o erro */
+    border: none;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+/* CAMADA 1: O FUNDO VERDE DO BOTÃO (Com o corte redondo para dentro) */
+.btn-inicio::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, var(--cor-fundo-botao-1) 0%, var(--cor-fundo-botao-2) 100%);
+    z-index: 1;
+    transition: background 0.3s ease;
+    border: black solid 0.13rem;
+
+    /* Aplica a máscara que morde os 4 cantos perfeitamente */
+    mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+    -webkit-mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+}
+
+/* CAMADA 2: A BORDA DOURADA (Que acompanha a curva para dentro sem quebrar) */
+.btn-inicio::after {
+    content: "";
+    position: absolute;
+    /* Fica levemente para fora para criar a linha dourada perfeita */
+    inset: -3px;
+    background: var(--cor-borda);
+    z-index: 0;
+    transition: background 0.3s ease;
+
+    /* Aplica a mesma máscara, ajustada para a espessura da borda */
+    mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+    -webkit-mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+}
+
+/* Garante que o texto e o ícone fiquem por cima das camadas de fundo */
+.btn-inicio img,
+.btn-inicio span {
+    position: relative;
+    z-index: 2;
+}
+
+/* EFEITOS DE HOVER (Quando passa o mouse) */
+.btn-inicio:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0px 5px 8px rgba(0, 0, 0, 0.6));
+}
+
+/* Clareia o fundo verde no hover */
+.btn-inicio:hover::before {
+    background: radial-gradient(circle, var(--cor-brilho-hover-1) 0%, var(--cor-brilho-hover-2) 100%);
+}
+
+/* Faz a borda dourada brilhar no hover */
+.btn-inicio:hover::after {
+    background: var(--cor-borda);
+}
+
+/* Efeito de Clique */
+.btn-inicio:active {
+    transform: translateY(1px);
+}
+
+.btn-info {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 12px 30px;
+    min-width: 180px;
+    height: 48px;
+    color: var(--cor-white);
+    margin-left: 50px;
+
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+
+    /* Remove as bordas antigas que causavam o erro */
+    border: none;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+/* CAMADA 1: O FUNDO VERDE DO BOTÃO (Com o corte redondo para dentro) */
+.btn-info::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #031311;
+    z-index: 1;
+    transition: background 0.3s ease;
+
+    /* Aplica a máscara que morde os 4 cantos perfeitamente */
+    mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+    -webkit-mask: radial-gradient(12px at 12px 12px, transparent 98%, #000 100%) -12px -12px;
+}
+
+/* CAMADA 2: A BORDA VENDE CLARO (Que acompanha a curva para dentro sem quebrar) */
+.btn-info::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    background: var(--cor-brilho-hover-1);
+    z-index: 0;
+    transition: background 0.3s ease;
+
+    /* Aplica a mesma máscara, ajustada para a espessura da borda */
+    mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+    -webkit-mask: radial-gradient(14px at 14px 14px, transparent 98%, #000 100%) -14px -14px;
+}
+
+/* Garante que o texto e o ícone fiquem por cima das camadas de fundo */
+.btn-info img,
+.btn-info span {
+    position: relative;
+    z-index: 2;
+}
+
+/* EFEITOS DE HOVER (Quando passa o mouse) */
+.btn-info:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0px 5px 8px rgba(0, 0, 0, 0.6));
+}
+
+/* Clareia o fundo verde no hover */
+.btn-info:hover::before {
+    background: radial-gradient(circle, var(--cor-brilho-hover-1) 0%, var(--cor-brilho-hover-2) 50%);
+}
+
+/* Faz a borda dourada brilhar no hover */
+.btn-info:hover::after {
+    background: #619791;
+}
+
+/* Efeito de Clique */
+.btn-info:active {
+    transform: translateY(1px);
+}
+
+/* --- SEÇÃO ROLE PARA EXPLORAR (RODAPÉ) --- */
+.role-explore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto;
+    gap: 8px;
+    transition: opacity 0.1s linear;
+}
+
+.role-explore img {
+    width: 50px;
+    /* Tamanho ajustado para o ícone do mouse */
+    height: auto;
+}
+
+.role-explore p {
+    font-family: 'Cinzel', serif;
+    color: #038a7e;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* O CONTAINER DA LINHA: Transforma em flex para deitar os elementos */
+.linha-decorativa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    /* Espaço entre as linhas e o detalhe do meio */
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+/* AS LINHAS LATERAIS (AGORA HORIZONTAIS) */
+.linha-decorativa .linha {
+    width: 40px;
+    /* Comprimento da linha horizontal */
+    height: 2px;
+    /* Espessura da linha */
+    background-color: #038a7e;
+    /* Cor verde/turquesa */
+    display: inline-block;
+}
+
+/* O DETALHE DO MEIO */
+.linha-decorativa .ponto {
+    color: #038a7e;
+    font-size: 0.6rem;
+    /* Deixa o losango pequenininho igual ao design */
+}
+
+
+/* MESA ONLINE DISPONIVEIS */
+
+.container-mesa-online {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Organiza os blocos verticalmente */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 18rem 4% 8rem 4%;
+    font-family: 'Cinzel', serif;
+    gap: 80px; /* Cria um excelente espaçamento separando a seção Tormenta da seção D&D */
+}
+
+/* Garante que o bloco do D&D use as mesmas dimensões do Tormenta */
+.mesa-online-tormenta, .mesa-online-ded {
+    width: 100%;
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.mesa-online-ded {
+    padding: 15rem 0;
+}
+
+/* --- ESTILIZAÇÃO DO CABEÇALHO --- */
+.mesa-tormenta-cabecalho {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.titulo-com-barra {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* A barra azul vertical do lado do título */
+.barra-vertical {
+    width: 5px;
+    height: 45px;
+    background-color: #00a896; /* Cor turquesa brilhante */
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.titulo-com-barra h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.subtítulo-sistema {
+    font-family: 'Inter', sans-serif;
+    color: #8b949e;
+    font-size: 1rem;
+    margin: 0;
+    max-width: 600px;
+}
+
+/* --- GRID / ALINHAMENTO DOS CARDS --- */
+.cards-mesas {
+    display: flex;
+    flex-direction: row; /* Coloca os cards lado a lado */
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap; /* Quebra linha em telas menores/celulares */
+}
+
+/* --- ESTILO INDIVIDUAL DO CARD --- */
+.card-tormenta {
+    flex: 1;
+    min-width: 250px; /* Impede que fiquem esmagados */
+    background: linear-gradient(180deg, #0b1514 0%, #050a0a 100%);
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* Efeito de Destaque no Card selecionado (Igual ao segundo card da imagem) */
+.card-tormenta.destaque {
+    border-color: #00a896;
+    box-shadow: 0px 0px 15px rgba(0, 168, 150, 0.3);
+}
+
+.card-tormenta:hover {
+    transform: translateY(-5px);
+}
+
+/* Imagem do topo do card */
+.card-imagem-placeholder {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid #1f2937;
+}
+
+/* Conteúdo interno do card */
+.card-conteudo {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os textos dentro do card */
+    text-align: center;
+    flex-grow: 1;
+}
+
+.card-icone {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #00a896;
+}
+
+.card-tormenta h3 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    letter-spacing: 1px;
+}
+
+.card-tormenta p {
+    font-family: 'Inter', sans-serif;
+    color: #8b949e;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+    flex-grow: 1; /* Garante que os botões fiquem alinhados embaixo */
+}
+
+/* Botão de dentro dos Cards */
+.btn-card {
+    width: 100%;
+    background-color: rgba(0, 168, 150, 0.1);
+    border: 1px solid #00a896;
+    color: #00a896;
+    padding: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.btn-card:hover {
+    background-color: #00a896;
+    color: #ffffff;
+}
+
+/* --- BOTÃO CENTRAL INFERIOR --- */
+.container-botao-inferior {
+    display: flex;
+    justify-content: center; /* Centraliza o botão na largura total */
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-mesas-central {
+    background: transparent;
+    border: 1px solid #00a896;
+    color: #ffffff;
+    padding: 15px 40px;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btn-mesas-central:hover {
+    background-color: #00a896;
+    box-shadow: 0px 0px 10px rgba(0, 168, 150, 0.5);
+}
+
+
+/* --- CONFIGURAÇÃO DO CONTAINER DE NOVIDADES --- */
+.container-novidades {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #070a08; /* Tom escuro idêntico ao das mesas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 4%;
+}
+
+.novidades-wrapper {
+    width: 100%;
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Reutilização do estilo de cabeçalho das seções anteriores */
+.novidades-cabecalho {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* --- GRID DOS CARDS DE NOVIDADES --- */
+.novidades-cards-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    flex-wrap: wrap; /* Garante responsividade em telas menores */
+}
+
+/* --- ESTILO INDIVIDUAL DO CARD --- */
+.card-novidade-item {
+    flex: 1;
+    min-width: 300px;
+    background: linear-gradient(180deg, #0b1216 0%, #060a0d 100%);
+    border: 1px solid #1c262f;
+    border-radius: 6px;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card-novidade-item:hover {
+    transform: translateY(-4px);
+    border-color: #038a7e;
+}
+
+.card-novidade-conteudo {
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+/* Data da publicação */
+.novidade-data {
+    font-family: 'Inter', sans-serif;
+    color: #00a896;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+/* Título da Novidade */
+.card-novidade-item h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.35rem;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.3;
+    font-weight: 700;
+    min-height: 70px; /* Garante alinhamento caso o título ocupe mais linhas */
+}
+
+/* Linha Divisória Interna (Sutil) */
+.divisor-card-interno {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.divisor-card-interno .linha-sutil {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(3,138,126,0) 0%, rgba(3,138,126,0.4) 50%, rgba(3,138,126,0) 100%);
+}
+
+.divisor-card-interno .losango-sutil {
+    color: rgba(3, 138, 126, 0.4);
+    font-size: 0.5rem;
+}
+
+/* Texto Descritivo */
+.card-novidade-item p {
+    font-family: 'Inter', sans-serif;
+    color: #8b949e;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Pequeno ponto decorativo no canto inferior esquerdo do card (como na imagem) */
+.marcador-inferior {
+    width: 6px;
+    height: 6px;
+    background-color: #00a896;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
+    box-shadow: 0 0 8px #00a896;
+}
+
+
+/* ================= SEÇÃO: CHAMADA FINAL (CTA) ================= */
+.container-criar-conta-final {
+    width: 100%;
+    padding: 24rem 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.criar-conta-final-wrapper {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2; /* Garante que fique acima de qualquer fundo */
+}
+
+/* --- CORREÇÃO DOS TEXTOS (Forçando a cor clara) --- */
+.criar-conta-final-wrapper h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.8rem;
+    color: #ffffff !important; /* !important garante que nenhum estilo padrão do navegador mude a cor para preto */
+    margin: 20px 0;
+    line-height: 1.2;
+}
+
+.criar-conta-final-wrapper h1 .destaque-turquesa {
+    color: #00e5cc !important;
+}
+
+.criar-conta-final-wrapper p {
+    font-family: 'Inter', sans-serif;
+    color: #a3aebc !important; /* Cor cinza clara para dar leitura sobre o fundo */
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0 auto 40px auto;
+    max-width: 600px;
+}
+
+/* --- DECORAÇÃO SUPERIOR (LOSANGO) --- */
+.decoracao-topo-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    gap: 12px;
+}
+
+.decoracao-topo-cta .linha-cta {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 229, 204, 0.5), transparent);
+}
+
+.decoracao-topo-cta .losango-cta {
+    color: #00a896;
+    font-size: 0.7rem;
+}
+
+/* ================= O BOTÃO IDÊNTICO À REFERÊNCIA ================= */
+.wrapper-btn-hexagonal {
+    display: inline-block;
+    position: relative;
+    /* Efeito drop-shadow que contorna o corte do botão perfeitamente */
+    filter: drop-shadow(0 0 15px rgba(0, 255, 204, 0.45));
+}
+
+.btn-criar-conta-glow {
+    background: linear-gradient(180deg, #023330 0%, #011a19 100%);
+    border: none;
+    color: #ffffff !important;
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 16px 55px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+    transition: all 0.3s ease;
+    
+    /* Recorte preciso dos cantos (Formato RPG) */
+    clip-path: polygon(15px 0%, calc(100% - 15px) 0%, 100% 50%, calc(100% - 15px) 100%, 15px 100%, 0% 50%);
+}
+
+/* Linha turquesa fina brilhante superior e inferior do botão */
+.btn-criar-conta-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 10%, #00ffcc 50%, transparent 90%);
+    padding: 1px 0;
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    background-position: top center, bottom center;
+    pointer-events: none;
+}
+
+/* Estilização dos Elementos Internos do Botão */
+.icone-btn-cta {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Deixa o ícone do usuário 100% branco */
+}
+
+.icone-btn-cta-seta {
+    width: 10px;
+    height: 10px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Deixa a seta 100% branca */
+}
+
+/* Efeito ao passar o mouse */
+.btn-criar-conta-glow:hover {
+    background: linear-gradient(180deg, #034743 0%, #012422 100%);
+    letter-spacing: 2.5px;
+}
+
+
+/* ================= SEÇÃO: FOOTER PRINCIPAL ================= */
+.footer-principal {
+    width: 100%;
+    background-color: #05080a;
+    border-top: 1px solid #111a22;
+    box-sizing: border-box;
+}
+
+.container-footer-links {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 60px 4% 40px 4%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.coluna-footer {
+    flex: 1;
+    min-width: 220px;
+}
+
+.titulo-coluna {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #16222f;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.icone-coluna {
+    font-size: 1rem;
+    color: #00a896;
+}
+
+.titulo-coluna h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: #ffffff;
+    margin: 0;
+    letter-spacing: 1.5px;
+}
+
+.links-coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.links-coluna a {
+    font-family: 'Inter', sans-serif;
+    color: #728293;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.links-coluna a:hover {
+    color: #00e5cc;
+}
+
+/* --- BARRA FINAL INFERIOR --- */
+.barra-footer-final {
+    width: 100%;
+    background-color: #030507;
+    border-top: 1px solid #0d151d;
+    padding: 30px 4%;
+    box-sizing: border-box;
+}
+
+.sub-container-final {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo-footer-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-footer-area img {
+    width: 60px;
+    height: 60px;
+}
+
+.logo-alf-img {
+    width: 24px;
+    height: 24px;
+}
+
+.texto-logo-footer {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.copyright-texto {
+    font-family: 'Inter', sans-serif;
+    color: #4f5d6c;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.redes-sociais-footer {
+    display: flex;
+    gap: 20px;
+}
+
+.redes-sociais-footer a {
+    color: #728293;
+    font-size: 1.2rem;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.redes-sociais-footer a:hover {
+    color: #00e5cc;
+    transform: translateY(-2px);
+}
+
+/* Responsividade Básica para Telas de Celular */
+@media (max-width: 768px) {
+    .criar-conta-final-wrapper h1 { font-size: 2rem; }
+    .sub-container-final { flex-direction: column; text-align: center; }
+    .quebra-mobile { display: block; }
+}
